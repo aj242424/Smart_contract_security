@@ -1,6 +1,4 @@
-# Smart_contract_security
-
-DOS attack on a smart contract.
+# DOS attack on a smart contract.
 
 We will see how a contract  which rejects accepting ether is used to trigger a DOS attack on a smart contract .
 We will also see a contract with similar functionality , but which is not vulnerable to DOS attacks.
