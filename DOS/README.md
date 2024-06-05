@@ -1,7 +1,5 @@
 # Smart_contract_security
-```bash
-;
-```
+
 DOS attack on a smart contract.
 
 We will see how a contract  which rejects accepting ether is used to trigger a DOS attack on a smart contract .
