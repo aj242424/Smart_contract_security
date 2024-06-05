@@ -96,7 +96,7 @@ function withdraw() external {
 
 The Hack contract exploits the vulnerability by becoming the king and then blocking any subsequent Ether transfers.The constructor sends enough Ether to the King contract to become the king.The fallback function always reverts, preventing any Ether transfer to the Hack contract, thus causing the DoS.
 
-#Mitigating the Vulnerability
+# Mitigating the Vulnerability
 
 Updated version of the King contract 
 
