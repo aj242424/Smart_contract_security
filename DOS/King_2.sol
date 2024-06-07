@@ -49,6 +49,7 @@ contract King {
     function _king() public view returns (address payable) {
         return king;
     }
+    
 }
 
 
