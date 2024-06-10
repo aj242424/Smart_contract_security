@@ -197,3 +197,45 @@ Summary
 The `Attack` contract exploits the re-entrancy vulnerability in the `EtherStore` contract by using a fallback function to recursively call the `withdraw` function, allowing it to drain the `EtherStore` contract of its Ether balance. 
 
 
+# Mitigation
+
+To mitigate re-entrancy attacks, follow these best practices:
+
+## 1.Check-Effects-Interactions Pattern:
+Update the user's balance before sending Ether.
+
+```bash
+function withdraw() public {
+    uint256 bal = balances[msg.sender];
+    require(bal > 0);
+
+    balances[msg.sender] = 0;
+    
+    (bool sent,) = msg.sender.call{value: bal}("");
+    require(sent, "Failed to send Ether");
+}
+```
+
+## 2.Use reentrancy guards:
+Use a mutex or reentrancy guard to prevent multiple calls
+
+```bash
+bool internal locked;
+
+modifier noReentrant() {
+    require(!locked, "No re-entrancy");
+    locked = true;
+    _;
+    locked = false;
+}
+
+function withdraw() public noReentrant {
+    uint256 bal = balances[msg.sender];
+    require(bal > 0);
+
+    balances[msg.sender] = 0;
+
+    (bool sent,) = msg.sender.call{value: bal}("");
+    require(sent, "Failed to send Ether");
+}
+```
